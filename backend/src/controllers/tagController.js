@@ -8,7 +8,7 @@ const getAllTags = (req, res) => {
 const getLastTag = (req, res) => {
   const tag = tagService.getLastTag();
   if (typeof tag === "undefined") {
-    res.status(200).json([]);
+    res.status(200).json({});
   } else {
     res.status(200).json(tag);
   }
