@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getLastTag, getAllTags } from "../../services/rfidService";
+import {
+  getLastTag,
+  getAllTags,
+  removeAllTags,
+} from "../../services/rfidService";
 import {
   Card,
   CardBody,
@@ -7,6 +11,7 @@ import {
   Flex,
   Text,
   Divider,
+  Button,
 } from "@chakra-ui/react";
 import format from "date-fns/format";
 
@@ -37,6 +42,13 @@ function MainPage() {
 
     return () => clearInterval(timer);
   }, []);
+
+  const removeTags = () => {
+    removeAllTags().then(() => {
+      setLastTag(null);
+      setTags(null);
+    });
+  };
 
   return (
     <Flex flexDirection="row" h="100vh">
@@ -71,6 +83,9 @@ function MainPage() {
             </CardFooter>
           </Card>
         )}
+        <Button colorScheme="red" onClick={removeTags}>
+          Limpar Tags
+        </Button>
       </Flex>
       <Divider orientation="vertical" />
       <Flex
@@ -83,27 +98,39 @@ function MainPage() {
         <Text fontSize="30px" fontWeight={700}>
           HISTÓRICO DE TAGS
         </Text>
-        {tags &&
-          tags
-            .sort((a, b) => {
-              return new Date(b.timestamp) - new Date(a.timestamp);
-            })
-            .map((tag) => {
-              return (
-                <Card w="70%" border="1px solid #ccc">
-                  <CardBody
-                    display="flex"
-                    flexDirection="column"
-                    alignItems="center"
-                  >
-                    <Text>
-                      EPC: {tag.epc} -{" "}
-                      {format(new Date(tag.timestamp), "dd/MM/yyyy - HH:mm:ss")}
-                    </Text>
-                  </CardBody>
-                </Card>
-              );
-            })}
+        <Flex
+          w="100%"
+          h="100%"
+          flexDirection="column"
+          alignItems="center"
+          gap="10px"
+          overflowY="scroll"
+        >
+          {tags &&
+            tags
+              .sort((a, b) => {
+                return new Date(b.timestamp) - new Date(a.timestamp);
+              })
+              .map((tag) => {
+                return (
+                  <Card w="70%" border="1px solid #ccc">
+                    <CardBody
+                      display="flex"
+                      flexDirection="column"
+                      alignItems="center"
+                    >
+                      <Text>
+                        EPC: {tag.epc} -{" "}
+                        {format(
+                          new Date(tag.timestamp),
+                          "dd/MM/yyyy - HH:mm:ss"
+                        )}
+                      </Text>
+                    </CardBody>
+                  </Card>
+                );
+              })}
+        </Flex>
       </Flex>
     </Flex>
   );

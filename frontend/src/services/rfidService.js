@@ -7,3 +7,7 @@ export const getLastTag = async () => {
 export const getAllTags = async () => {
   return await api.get("api/tags");
 };
+
+export const removeAllTags = async () => {
+  return await api.post("api/tags/removeAll");
+};
