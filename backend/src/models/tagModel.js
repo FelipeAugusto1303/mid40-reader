@@ -19,7 +19,7 @@ const addTag = (tag) => {
 };
 
 const removeTags = () => {
-  tags.splice(0, tags.length - 1);
+  tags = [];
   return tags;
 };
 

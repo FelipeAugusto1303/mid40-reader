@@ -53,6 +53,6 @@ router.get("/tags/lastTag", tagController.getLastTag);
  *         description: Tag adicionada com sucesso
  */
 router.post("/tags", tagController.addTag);
-router.delete("/tags", tagController.removeTags);
+router.post("/tags/removeAll", tagController.removeTags);
 
 module.exports = router;

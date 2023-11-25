@@ -31,7 +31,7 @@ const addTag = (req, res) => {
 };
 
 const removeTags = (req, res) => {
-  const tags = tagService.removeTags;
+  const tags = tagService.removeTags();
   res.status(200).json(tags);
 };
 
