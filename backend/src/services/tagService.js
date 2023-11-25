@@ -12,8 +12,13 @@ const addTag = (tag) => {
   return tagModel.addTag(tag);
 };
 
+const removeTags = () => {
+  return tagModel.removeTags();
+};
+
 module.exports = {
   getAllTags,
   getLastTag,
   addTag,
+  removeTags,
 };

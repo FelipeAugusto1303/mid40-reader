@@ -30,6 +30,11 @@ const addTag = (req, res) => {
   res.status(201).json(response);
 };
 
+const removeTags = (req, res) => {
+  const tags = tagService.removeTags;
+  res.status(200).json(tags);
+};
+
 const serverRunning = (req, res) => {
   res.status(200).send("Server is running on port 4000");
 };
@@ -39,4 +44,5 @@ module.exports = {
   getLastTag,
   addTag,
   serverRunning,
+  removeTags,
 };

@@ -18,8 +18,14 @@ const addTag = (tag) => {
   return newTag;
 };
 
+const removeTags = () => {
+  tags.splice(0, tags.length - 1);
+  return tags;
+};
+
 module.exports = {
   getAllTags,
   getLastTag,
   addTag,
+  removeTags,
 };
